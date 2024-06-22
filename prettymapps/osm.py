@@ -6,8 +6,8 @@ from osmnx import settings
 from geopandas import clip, GeoDataFrame
 from shapely.geometry import Polygon
 
-from prettymapp.geo import explode_multigeometries
-from prettymapp.settings import LC_SETTINGS
+from prettymapps.geo import explode_multigeometries
+from prettymapps.settings import LC_SETTINGS
 
 settings.use_cache = True
 settings.log_console = False

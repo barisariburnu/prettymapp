@@ -1,4 +1,4 @@
-from prettymapp.plotting import adjust_lightness
+from prettymapps.plotting import adjust_lightness
 
 
 def test_adjust_lightness():

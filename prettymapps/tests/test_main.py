@@ -3,9 +3,9 @@ from geopandas import GeoDataFrame
 from shapely.geometry import box
 from pyproj import CRS
 
-from prettymapp.osm import get_osm_geometries
-from prettymapp.plotting import Plot
-from prettymapp.settings import STYLES
+from prettymapps.osm import get_osm_geometries
+from prettymapps.plotting import Plot
+from prettymapps.settings import STYLES
 
 AOI = box(
     13.373621926483281, 52.507705884952586, 13.374621926483281, 52.508705884952586
@@ -31,7 +31,7 @@ def test_osm_live():
 
 
 # def test_osm_liveaa():
-#     from prettymapp.geo import get_aoi
+#     from prettymapps.geo import get_aoi
 #
 #     aoi, aoi_utm_crs = get_aoi("Miami", radius=1100)
 #     df = get_osm_geometries(aoi)

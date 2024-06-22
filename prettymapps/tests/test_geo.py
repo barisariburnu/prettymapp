@@ -5,7 +5,7 @@ import osmnx as ox
 import geopandas as gpd
 import pandas as pd
 
-from prettymapp.geo import (
+from prettymapps.geo import (
     validate_coordinates,
     get_aoi,
     GeoCodingError,

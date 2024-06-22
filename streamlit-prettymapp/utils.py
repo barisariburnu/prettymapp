@@ -11,9 +11,9 @@ import streamlit as st
 from geopandas import GeoDataFrame
 from shapely.geometry import Polygon
 
-from prettymapp.plotting import Plot
-from prettymapp.osm import get_osm_geometries
-from prettymapp.settings import STYLES
+from prettymapps.plotting import Plot
+from prettymapps.osm import get_osm_geometries
+from prettymapps.settings import STYLES
 
 
 @st.cache_data(

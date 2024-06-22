@@ -12,7 +12,7 @@ import matplotlib.font_manager as fm
 from matplotlib.patches import Ellipse
 import matplotlib.patheffects as PathEffects
 
-from prettymapp.settings import STREETS_WIDTH
+from prettymapps.settings import STREETS_WIDTH
 
 
 def adjust_lightness(color: str, amount: float = 0.5) -> Tuple[float, float, float]:
@@ -86,7 +86,6 @@ class Plot:
             self.set_map_contour()
         if self.name_on:
             self.set_name()
-        self.set_credits(add_package_credit=True)
 
         return self.fig
 
@@ -224,14 +223,3 @@ class Plot:
             fontproperties=fontproperties,
             size=self.font_size,
         )
-
-    def set_credits(self, add_package_credit=True):
-        credit_text = "© OpenStreetMap"
-        package_credit_text = "\n prettymapp | prettymaps"
-        if add_package_credit:
-            credit_text = credit_text + package_credit_text
-
-        x = self.xmin + 0.87 * self.xdif
-        y = self.ymin - 0.70 * self.bg_buffer_y
-        text = self.ax.text(x=x, y=y, s=credit_text, c="w", fontsize=9, zorder=6)
-        text.set_path_effects([PathEffects.withStroke(linewidth=3, foreground="black")])

@@ -2,16 +2,17 @@ import copy
 import json
 
 import streamlit as st
-from streamlit_image_select import image_select
+from slugify import slugify
 
 from utils import (
+    plt_to_svg,
     st_get_osm_geometries,
     st_plot_all,
     get_colors_from_style,
     gdf_to_bytesio_geojson,
 )
-from prettymapp.geo import GeoCodingError, get_aoi
-from prettymapp.settings import STYLES
+from prettymapps.geo import GeoCodingError, get_aoi
+from prettymapps.settings import STYLES
 
 st.set_page_config(
     page_title="prettymapp", page_icon="🖼️", initial_sidebar_state="collapsed"
@@ -34,17 +35,6 @@ example_image_pattern = "streamlit-prettymapp/example_prints/{}_small.png"
 example_image_fp = [
     example_image_pattern.format(name.lower()) for name in list(EXAMPLES.keys())[:4]
 ]
-index_selected = image_select(
-    "",
-    images=example_image_fp,
-    captions=list(EXAMPLES.keys())[:4],
-    index=0,
-    return_value="index",
-)
-if index_selected != st.session_state["previous_example_index"]:
-    name_selected = list(EXAMPLES.keys())[index_selected]
-    st.session_state.update(EXAMPLES[name_selected].copy())
-    st.session_state["previous_example_index"] = index_selected
 
 st.write("")
 form = st.form(key="form_settings")
@@ -190,19 +180,18 @@ with st.spinner("Creating map... (may take up to a minute)"):
     # result_container.write(html, unsafe_allow_html=True)
     st.pyplot(fig, pad_inches=0, bbox_inches="tight", transparent=True, dpi=300)
 
-# svg_string = plt_to_svg(fig)
-# html = svg_to_html(svg_string)
-# st.write("")
-# fname = slugify(address)
-# img_format = st.selectbox("Download image as", ["svg", "png", "jpg"], index=0)
-# if img_format == "svg":
-#     data = svg_string
-# elif img_format == "png":
-#     import io
-#
-#     data = io.BytesIO()
-#     fig.savefig(data, pad_inches=0, bbox_inches="tight", transparent=True)
-# st.download_button(label="Download image", data=data, file_name=f"{fname}.{img_format}")
+svg_string = plt_to_svg(fig)
+st.write("")
+fname = slugify(address)
+img_format = st.selectbox("Download image as", ["svg", "png", "jpg"], index=0)
+if img_format == "svg":
+    data = svg_string
+elif img_format == "png":
+    import io    
+    data = io.BytesIO()
+    fig.savefig(data, pad_inches=0, bbox_inches="tight", transparent=True)
+
+st.download_button(label="Download image", data=data, file_name=f"{fname}.{img_format}")
 
 st.markdown("</br>", unsafe_allow_html=True)
 st.markdown("</br>", unsafe_allow_html=True)

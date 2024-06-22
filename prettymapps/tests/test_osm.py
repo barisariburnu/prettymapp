@@ -1,4 +1,4 @@
-from prettymapp.osm import get_osm_tags, get_osm_geometries_from_xml
+from prettymapps.osm import get_osm_tags, get_osm_geometries_from_xml
 
 
 def test_get_osm_tags():
