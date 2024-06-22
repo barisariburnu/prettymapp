@@ -186,7 +186,7 @@ fname = slugify(address)
 img_format = st.selectbox("Download image as", ["svg", "png", "jpg"], index=0)
 if img_format == "svg":
     data = svg_string
-elif img_format == "png":
+elif img_format in ["png", "jpg"]:
     import io    
     data = io.BytesIO()
     fig.savefig(data, pad_inches=0, bbox_inches="tight", transparent=True)
